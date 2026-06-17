@@ -1,0 +1,14 @@
+{
+  "name": "Cosmic Goblin Joke Grimoire",
+  "short_name": "Joke Grimoire",
+  "description": "Mobile-first joke book, setlist builder, joke index, analysis archive, and flashcard deck.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b0e15",
+  "theme_color": "#111827",
+  "orientation": "portrait-primary",
+  "icons": [
+    {"src":"assets/icon-192.png","sizes":"192x192","type":"image/png"},
+    {"src":"assets/icon-512.png","sizes":"512x512","type":"image/png"}
+  ]
+}

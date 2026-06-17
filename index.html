@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#111827" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Joke Grimoire" />
+  <title>Cosmic Goblin Joke Grimoire</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg"></div>
+  <div id="appShell">
+    <header class="topbar">
+      <div>
+        <h1>Cosmic Goblin Joke Grimoire</h1>
+        <p id="stats">Loading joke database…</p>
+      </div>
+      <button id="installBtn" class="ghost hidden">Install</button>
+    </header>
+
+    <main>
+      <section class="bookPanel cardish" id="bookPanel">
+        <div class="book" id="book" aria-live="polite">
+          <div class="bookFace">
+            <div class="horn hornLeft"></div><div class="horn hornRight"></div>
+            <div class="eye"></div><div class="eye right"></div>
+            <div class="sigil">?</div>
+            <h2 id="jokeId"></h2>
+            <p id="jokeText"></p>
+          </div>
+        </div>
+        <div class="bookControls">
+          <button id="prev">‹</button>
+          <button id="speakBtn">Read</button>
+          <button id="addSet">Add</button>
+          <button id="next">›</button>
+        </div>
+        <div class="filters">
+          <input id="search" placeholder="Search jokes, tags, comedians" autocomplete="off" />
+          <div class="row2">
+            <select id="sort">
+              <option value="rating">Best rated</option>
+              <option value="times_written">Most written</option>
+              <option value="variation_count">Most variations</option>
+              <option value="length_words">Longest</option>
+            </select>
+            <select id="maturity">
+              <option value="">All maturity</option>
+              <option>PG-ish</option>
+              <option>PG-13</option>
+              <option>R / club material</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <nav class="tabs cardish">
+        <button data-tab="analysis" class="active">Analysis</button>
+        <button data-tab="index">Index</button>
+        <button data-tab="setlist">Setlist</button>
+        <button data-tab="writer">Write</button>
+        <button data-tab="data">Data</button>
+      </nav>
+
+      <section class="panel cardish active" id="analysisPanel">
+        <h2>Joke Analysis</h2>
+        <div id="analysis"></div>
+        <h3>Variations</h3>
+        <div id="vars"></div>
+        <h3>Your Notes</h3>
+        <textarea id="noteBox" placeholder="Private note for this joke; saved in this browser"></textarea>
+      </section>
+
+      <section class="panel cardish" id="indexPanel">
+        <h2>Joke Index</h2>
+        <div id="jokeIndex"></div>
+      </section>
+
+      <section class="panel cardish" id="setlistPanel">
+        <h2>Setlist Builder</h2>
+        <div class="row2"><input id="setName" placeholder="Setlist name" /><button id="saveSet">Save</button></div>
+        <div id="setItems"></div>
+        <h3>Saved Setlists</h3>
+        <div id="savedSets"></div>
+        <h3>Flashcards</h3>
+        <div id="cards"></div>
+      </section>
+
+      <section class="panel cardish" id="writerPanel">
+        <h2>Write New Joke</h2>
+        <textarea id="newJoke" placeholder="Premise, setup, punchline, tags..."></textarea>
+        <input id="newTags" placeholder="tags, comma separated" />
+        <button id="saveNew">Save Draft Joke</button>
+        <div id="drafts"></div>
+      </section>
+
+      <section class="panel cardish" id="dataPanel">
+        <h2>Data</h2>
+        <div class="row2"><button id="exportState">Export App Data</button><button id="clearState" class="danger">Clear Local Data</button></div>
+        <p class="small">Exports saved setlists, notes, and draft jokes from this browser. Joke database is loaded from <code>data/jokes.json</code>.</p>
+        <p><a href="data/jokes.csv" download>Download jokes.csv</a></p>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

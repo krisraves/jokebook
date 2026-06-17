@@ -1,0 +1,9 @@
+{
+  "name": "cosmic-goblin-joke-grimoire",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npx serve .",
+    "build": "echo static app - no build required"
+  }
+}
