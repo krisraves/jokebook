@@ -1,28 +1,21 @@
 # Cosmic Goblin Joke Grimoire Web App
 
-Mobile-first installable PWA for the joke database.
+Mobile-first static PWA for browsing, filtering, analyzing, and building setlists from the consolidated joke database.
 
-## Features
+## Changes in this build
 
-- Swipeable joke-book landing page
-- Search, sort, and maturity filter
-- Text-to-speech joke reading
-- Grouped variations per joke
-- Joke analysis, tags, demographic reactions, and comedian-style lenses
-- Setlist builder with reorder/remove
-- Saved setlists in browser storage
-- Flashcard deck in setlist order
-- New joke draft section with tags
-- Private per-joke notes saved locally
-- Export browser app data as JSON
-- Offline cache via service worker
+- Conservative joke consolidation pass at about 70%+ confidence.
+- Best-version joke cards now prioritize clean standalone versions.
+- Other drafts remain available under the Variations section.
+- Removed the eye/circle/question-mark card graphics.
+- Added original SVG background/emblem assets.
+- Added filter controls for maturity, length, style, subject, comedian-style match, search, sort, and sort direction.
+- Vercel static deployment configured with `outputDirectory: "."`.
 
-## Deploy on Vercel
+## Deploy
 
-1. Upload this folder as a Vercel project.
-2. Framework preset: **Other**.
-3. Build command: leave blank.
-4. Output directory: leave blank or use `.`.
-5. Deploy.
+Push the contents of this folder to GitHub root and deploy on Vercel with:
 
-The app is static and should work on Chrome mobile and desktop.
+- Framework Preset: Other
+- Build Command: `npm run build`
+- Output Directory: `.`
