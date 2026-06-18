@@ -7,12 +7,50 @@ const store = {
 const esc = s => String(s ?? '').replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
 const uniq = arr => [...new Set(arr.filter(Boolean))].sort((a,b)=>String(a).localeCompare(String(b)));
 
-fetch('data/jokes.json').then(r => r.json()).then(d => {
-  DATA = d; JOKES = d.jokes || []; filtered = [...JOKES];
-  $('stats').textContent = `${d.summary.grouped_jokes} consolidated joke cards • ${d.summary.candidate_occurrences} note occurrences • ${d.summary.detected_setlists} detected setlists`;
-  populateFilters(); loadSet(); applyFilters(); renderDrafts(); renderSavedSets();
-}).catch(() => $('stats').textContent = 'Could not load data/jokes.json');
+async function loadData() {
+  const paths = [
+    '/data/jokes.json',
+    './data/jokes.json',
+    'data/jokes.json'
+  ];
 
+  for (const path of paths) {
+    try {
+      const r = await fetch(path, { cache: 'no-store' });
+
+      if (!r.ok) {
+        throw new Error(`HTTP ${r.status}`);
+      }
+
+      const d = await r.json();
+
+      DATA = d;
+      JOKES = d.jokes || [];
+      filtered = [...JOKES];
+
+      $('stats').textContent =
+        `${d.summary.grouped_jokes} consolidated joke cards • ` +
+        `${d.summary.candidate_occurrences} note occurrences • ` +
+        `${d.summary.detected_setlists} detected setlists`;
+
+      populateFilters();
+      loadSet();
+      applyFilters();
+      renderDrafts();
+      renderSavedSets();
+
+      console.log('Loaded jokes from', path);
+      return;
+    } catch (err) {
+      console.warn('Failed:', path, err);
+    }
+  }
+
+  $('stats').textContent =
+    'Could not load joke database. Check /data/jokes.json';
+}
+
+loadData();
 function addOptions(id, values){ const el=$(id); const first=el.firstElementChild; el.innerHTML=''; el.appendChild(first); values.forEach(v=>{ const o=document.createElement('option'); o.value=v; o.textContent=v; el.appendChild(o); }); }
 function populateFilters(){
   addOptions('maturity', uniq(JOKES.map(j=>j.maturity_rating)));
