@@ -1,3 +1,4 @@
+let firstLoad = true;
 let DATA, JOKES = [], filtered = [], pos = 0, setlist = [], deferredInstall;
 const $ = id => document.getElementById(id);
 const store = {
@@ -102,7 +103,12 @@ function applyFilters(){
     if(s === 'best_version') return dir * String(a.best_version).localeCompare(String(b.best_version));
     return dir * ((a[s] || 0) - (b[s] || 0));
   });
+  if (firstLoad && filtered.length > 0) {
+  pos = Math.floor(Math.random() * filtered.length);
+  firstLoad = false;
+} else {
   pos = 0;
+  }
   $('filterCount').textContent = `${filtered.length} cards shown out of ${JOKES.length}`;
   render(); renderIndex();
 }
